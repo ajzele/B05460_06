@@ -1,13 +1,88 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="UTF-8" />
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
-        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
-    </head>
-    <body>
-        {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
-    </body>
+<!doctype html>
+<html class="no-js" lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>{% block title %}Welcome!{% endblock %}</title>
+    <link rel="stylesheet" href="{{ asset('css/foundation.css') }}"/>
+    {% block stylesheets %}{% endblock %}
+</head>
+<body>
+
+
+<div class="top-bar">
+    <div class="top-bar-title">
+        <span data-responsive-toggle="responsive-menu" data-hide-for="medium">
+          <button class="menu-icon dark" type="button" data-toggle></button>
+        </span>
+        <strong>shop</strong>
+    </div>
+    <div id="responsive-menu">
+        <div class="top-bar-left">
+            {% block category_menu %}
+                <ul class="menu">
+                    <li><a href="#">Women</a></li>
+                    <li><a href="#">Men</a></li>
+                    <li><a href="#">Gear</a></li>
+                </ul>
+            {% endblock %}
+        </div>
+        <div class="top-bar-right">
+            {% block customer_menu %}
+                <ul class="menu">
+                    <ul class="dropdown menu" data-dropdown-menu>
+                        <li>
+                            <a href="#">Branko Ajzele</a>
+                            <ul class="menu vertical">
+                                <li><a href="#">Account</a></li>
+                                <li><a href="#">Logout</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="#">Two</a></li>
+                    </ul>
+                </ul>
+            {% endblock %}
+        </div>
+    </div>
+</div>
+
+<div class="row column">
+    {% for flash_message in app.session.flashBag.get('alert') %}
+        <div class="alert callout">
+            {{ flash_message }}
+        </div>
+    {% endfor %}
+    {% for flash_message in app.session.flashBag.get('warning') %}
+        <div class="warning callout">
+            {{ flash_message }}
+        </div>
+    {% endfor %}
+    {% for flash_message in app.session.flashBag.get('success') %}
+        <div class="success callout">
+            {{ flash_message }}
+        </div>
+    {% endfor %}
+</div>
+
+{% block body %}{% endblock %}
+
+<div class="row column">
+    <ul class="menu">
+        <li><a href="{{ path('about') }}">About Us</a></li>
+        <li><a href="{{ path('customer_service') }}">Customer Service</a></li>
+        <li><a href="{{ path('privacy_cookie') }}">Privacy and Cookie Policy</a></li>
+        <li><a href="{{ path('orders_returns') }}">Orders and Returns</a></li>
+        <li><a href="{{ path('contact') }}">Contact Us</a></li>
+    </ul>
+</div>
+
+<script src="{{ asset('js/vendor/jquery.js') }}"></script>
+<script src="{{ asset('js/vendor/what-input.js') }}"></script>
+<script src="{{ asset('js/vendor/foundation.js') }}"></script>
+<script>
+    $(document).foundation();
+</script>
+{% block javascripts %}{% endblock %}
+</body>
 </html>
