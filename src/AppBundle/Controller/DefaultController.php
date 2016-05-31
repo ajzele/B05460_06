@@ -37,7 +37,7 @@ class DefaultController extends Controller
      */
     public function customerServiceAction()
     {
-        return $this->render('default/about.html.twig');
+        return $this->render('default/customer-service.html.twig');
     }
 
     /**
