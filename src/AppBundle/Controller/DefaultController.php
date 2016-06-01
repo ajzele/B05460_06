@@ -24,6 +24,31 @@ class DefaultController extends Controller
         return $this->render('default/index.html.twig');
     }
 
+
+    /**
+     * @Route("/new", name="new")
+     */
+    public function newAction()
+    {
+        return $this->render('default/about.html.twig');
+    }
+
+    /**
+     * @Route("/test/new", name="test_new")
+     */
+    public function testNewAction()
+    {
+        return $this->render('default/about.html.twig');
+    }
+
+    /**
+     * @Route("/test/new/test", name="test_new_test")
+     */
+    public function testNewTestAction()
+    {
+        return $this->render('default/about.html.twig');
+    }
+
     /**
      * @Route("/about", name="about")
      */
@@ -61,6 +86,9 @@ class DefaultController extends Controller
      */
     public function contactAction(Request $request)
     {
+
+
+
         // Build a form, with validation rules in place
         $form = $this->createFormBuilder()
             ->add('name', TextType::class, array(
