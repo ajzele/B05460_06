@@ -10,36 +10,39 @@
 </head>
 <body>
 
-
 <div class="top-bar">
-    <div class="top-bar-title"><span data-responsive-toggle="responsive-menu" data-hide-for="medium"><button
-                    class="menu-icon dark" type="button" data-toggle></button></span><strong><a
-                    href="{{ path('homepage') }}">HOME</a></strong></div>
+    <div class="top-bar-title">
+    <span data-responsive-toggle="responsive-menu" data-hide-for="medium">
+      <button class="menu-icon dark" type="button" data-toggle></button>
+    </span>
+        <strong>Shop</strong>
+    </div>
     <div id="responsive-menu">
         <div class="top-bar-left">
+            {# category_menu is global twig var filled from service, and later overriden by another module service #}
             {% block category_menu %}
                 <ul class="menu">
-                    <li><a href="#">Women</a></li>
-                    <li><a href="#">Men</a></li>
-                    <li><a href="#">Gear</a></li>
+                    {% for link in category_menu.getItems() %}
+                        <li><a href="{{ link.path }}">{{ link.label }}</li></a>
+                    {% endfor %}
                 </ul>
             {% endblock %}
         </div>
         <div class="top-bar-right">
-            {% block customer_menu %}
-                <ul class="menu">
-                    <ul class="dropdown menu" data-dropdown-menu>
-                        <li>
-                            <a href="#">Branko Ajzele</a>
-                            <ul class="menu vertical">
-                                <li><a href="#">Account</a></li>
-                                <li><a href="#">Logout</a></li>
-                            </ul>
-                        </li>
-                        <li><a href="#">Two</a></li>
-                    </ul>
-                </ul>
-            {% endblock %}
+            <ul class="menu">
+                {# customer_menu is global twig var filled from service, and later overriden by another module service #}
+                {% block customer_menu %}
+                    {% for link in customer_menu.getItems() %}
+                        <li><a href="{{ link.path }}">{{ link.label }}</li></a>
+                    {% endfor %}
+                {% endblock %}
+                {# checkout_menu is global twig var filled from service, and later overriden by another module service #}
+                {% block checkout_menu %}
+                    {% for link in checkout_menu.getItems() %}
+                        <li><a href="{{ link.path }}">{{ link.label }}</li></a>
+                    {% endfor %}
+                {% endblock %}
+            </ul>
         </div>
     </div>
 </div>
@@ -63,7 +66,7 @@
 </div>
 
 <div class="row column">
-{% block body %}{% endblock %}
+    {% block body %}{% endblock %}
 </div>
 
 <div class="row column">

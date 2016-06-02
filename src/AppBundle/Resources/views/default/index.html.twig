@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    {% if products_bestsellers %}
+        <h2>Best Sellers</h2>
+        <div class="row small-up-1 medium-up-3 large-up-5" data-equalizer data-equalize-by-row="true">
+            {% for product in products_bestsellers.getItems() %}
+                <div class="column">
+                    <img src="#" alt=""/>
+                    <a href="{{ product.path }}">{{ product.name }}</a>
+                    <div>${{ product.price }}</div>
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    {% if products_onsale %}
+        <h2>On Sale</h2>
+        <div class="row small-up-1 medium-up-3 large-up-5" data-equalizer data-equalize-by-row="true">
+            {% for product in products_onsale.getItems() %}
+                <div class="column">
+                    <img src="#" alt=""/>
+                    <a href="{{ product.path }}">{{ product.name }}</a>
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+{% endblock %}

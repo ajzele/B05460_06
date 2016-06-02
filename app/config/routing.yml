@@ -1,3 +1,7 @@
+foggyline_bucket:
+    resource: "@FoggylineBucketBundle/Resources/config/routing.xml"
+    prefix:   /foggyline/
+
 app:
     resource: "@AppBundle/Controller/"
     type:     annotation

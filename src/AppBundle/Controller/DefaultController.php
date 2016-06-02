@@ -21,32 +21,7 @@ class DefaultController extends Controller
      */
     public function indexAction(Request $request)
     {
-        return $this->render('default/index.html.twig');
-    }
-
-
-    /**
-     * @Route("/new", name="new")
-     */
-    public function newAction()
-    {
-        return $this->render('default/about.html.twig');
-    }
-
-    /**
-     * @Route("/test/new", name="test_new")
-     */
-    public function testNewAction()
-    {
-        return $this->render('default/about.html.twig');
-    }
-
-    /**
-     * @Route("/test/new/test", name="test_new_test")
-     */
-    public function testNewTestAction()
-    {
-        return $this->render('default/about.html.twig');
+        return $this->render('AppBundle:default:index.html.twig');
     }
 
     /**
@@ -54,7 +29,7 @@ class DefaultController extends Controller
      */
     public function aboutAction()
     {
-        return $this->render('default/about.html.twig');
+        return $this->render('AppBundle:default:about.html.twig');
     }
 
     /**
@@ -62,7 +37,7 @@ class DefaultController extends Controller
      */
     public function customerServiceAction()
     {
-        return $this->render('default/customer-service.html.twig');
+        return $this->render('AppBundle:default:customer-service.html.twig');
     }
 
     /**
@@ -70,7 +45,7 @@ class DefaultController extends Controller
      */
     public function ordersAndReturnsAction()
     {
-        return $this->render('default/orders-returns.html.twig');
+        return $this->render('AppBundle:default:orders-returns.html.twig');
     }
 
     /**
@@ -78,7 +53,7 @@ class DefaultController extends Controller
      */
     public function privacyAndCookiePolicyAction()
     {
-        return $this->render('default/privacy-cookie.html.twig');
+        return $this->render('AppBundle:default:privacy-cookie.html.twig');
     }
 
     /**
@@ -86,8 +61,6 @@ class DefaultController extends Controller
      */
     public function contactAction(Request $request)
     {
-
-
 
         // Build a form, with validation rules in place
         $form = $this->createFormBuilder()
@@ -122,7 +95,7 @@ class DefaultController extends Controller
         }
 
         // Render "contact us" page
-        return $this->render('default/contact.html.twig', array(
+        return $this->render('AppBundle:default:contact.html.twig', array(
             'form' => $form->createView()
         ));
     }
