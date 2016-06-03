@@ -7,11 +7,11 @@ class OnSale
     public function getItems()
     {
         return array(
-            array('path' => 'iphone', 'name' => 'iPhone', 'img' => '#', 'price' => 19.99),
-            array('path' => 'lg', 'name' => 'LG', 'img' => '#', 'price' => 29.99),
-            array('path' => 'samsung', 'name' => 'Samsung', 'img' => '#', 'price' => 39.99),
-            array('path' => 'lumia', 'name' => 'Lumia', 'img' => '#', 'price' => 49.99),
-            array('path' => 'edge', 'name' => 'Edge', 'img' => '#', 'price' => 69.99),
+            array('path' => 'iphone', 'name' => 'iPhone', 'img' => '/img/missing-image.png', 'price' => 19.99),
+            array('path' => 'lg', 'name' => 'LG', 'img' => '/img/missing-image.png', 'price' => 29.99),
+            array('path' => 'samsung', 'name' => 'Samsung', 'img' => '/img/missing-image.png', 'price' => 39.99),
+            array('path' => 'lumia', 'name' => 'Lumia', 'img' => '/img/missing-image.png', 'price' => 49.99),
+            array('path' => 'edge', 'name' => 'Edge', 'img' => '/img/missing-image.png', 'price' => 69.99),
         );
     }
 }

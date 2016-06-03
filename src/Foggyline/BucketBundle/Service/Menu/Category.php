@@ -9,7 +9,13 @@ class Category
         return array(
             array('path' => 'women', 'label' => 'Women'),
             array('path' => 'men', 'label' => 'Men'),
-            array('path' => 'sport', 'label' => 'Sport')
+            array('path' => 'sport', 'label' => 'Sport'),
+            array('path' => 'women', 'label' => 'Women'),
+            array('path' => 'men', 'label' => 'Men'),
+            array('path' => 'sport', 'label' => 'Sport'),
+            array('path' => 'women', 'label' => 'Women'),
+            array('path' => 'men', 'label' => 'Men'),
+            array('path' => 'sport', 'label' => 'Sport'),
         );
     }
 }
