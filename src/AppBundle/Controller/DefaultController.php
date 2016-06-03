@@ -74,7 +74,8 @@ class DefaultController extends Controller
                 'constraints' => new Length(array('min' => 3))
             ))
             ->add('save', SubmitType::class, array(
-                'label' => 'Reach Out!'
+                'label' => 'Reach Out!',
+                'attr' => array('class' => 'button'),
             ))
             ->getForm();
 
