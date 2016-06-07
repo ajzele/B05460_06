@@ -123,6 +123,11 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
             return array (  '_controller' => 'AppBundle\\Controller\\DefaultController::aboutAction',  '_route' => 'about',);
         }
 
+        // new
+        if ($pathinfo === '/new') {
+            return array (  '_controller' => 'AppBundle\\Controller\\DefaultController::newAction',  '_route' => 'new',);
+        }
+
         // customer_service
         if ($pathinfo === '/customer-service') {
             return array (  '_controller' => 'AppBundle\\Controller\\DefaultController::customerServiceAction',  '_route' => 'customer_service',);

@@ -6,6 +6,7 @@ class OnSale
 {
     public function getItems()
     {
+        // Note, this can be arranged as per some "Product" interface, so to know what dummy data to return
         return array(
             array('path' => 'iphone', 'name' => 'iPhone', 'img' => '/img/missing-image.png', 'price' => 19.99, 'add_to_cart_url' => '#'),
             array('path' => 'lg', 'name' => 'LG', 'img' => '/img/missing-image.png', 'price' => 29.99, 'add_to_cart_url' => '#'),
