@@ -1,3 +1,11 @@
+foggyline_catalog_category:
+    resource: "@FoggylineCatalogBundle/Controller/CategoryController.php"
+    type:     annotation
+
+foggyline_catalog:
+    resource: "@FoggylineCatalogBundle/Resources/config/routing.xml"
+    prefix:   /
+
 app:
     resource: "@AppBundle/Controller/"
     type:     annotation
