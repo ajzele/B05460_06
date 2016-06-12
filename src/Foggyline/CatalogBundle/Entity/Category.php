@@ -3,6 +3,7 @@
 namespace Foggyline\CatalogBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Foggyline\CatalogBundle\Entity\Product;
 
 /**
  * Category
@@ -49,6 +50,31 @@ class Category
      */
     private $image;
 
+    /**
+     * @ORM\OneToMany(targetEntity="Product", mappedBy="category")
+     */
+    private $products;
+
+    public function __construct()
+    {
+        $this->products = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getProducts()
+    {
+        return $this->products;
+    }
+
+    /**
+     * @param mixed $products
+     */
+    public function setProducts($products)
+    {
+        $this->products = $products;
+    }
 
     /**
      * Get id
@@ -154,6 +180,11 @@ class Category
     public function getImage()
     {
         return $this->image;
+    }
+
+    public function __toString()
+    {
+        return $this->getTitle();
     }
 }
 
