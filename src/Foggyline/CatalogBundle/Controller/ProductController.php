@@ -7,7 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Foggyline\CatalogBundle\Entity\Product;
-use Foggyline\CatalogBundle\Form\ProductType;
+use Symfony\Component\HttpFoundation\File\File;
 
 /**
  * Product controller.
@@ -46,6 +46,12 @@ class ProductController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            /* @var $image \Symfony\Component\HttpFoundation\File\UploadedFile */
+            if ($image = $product->getImage()) {
+                $name = $this->get('foggyline_catalog.image_uploader')->upload($image);
+                $product->setImage($name);
+            }
+
             $em = $this->getDoctrine()->getManager();
             $em->persist($product);
             $em->flush();
@@ -83,11 +89,31 @@ class ProductController extends Controller
      */
     public function editAction(Request $request, Product $product)
     {
+        /**
+         * When creating a form to edit an already persisted item, the file form type still expects a File instance.
+         * As the persisted entity now contains only the relative file path, you first have to concatenate the
+         * configured upload path with the stored filename and create a new File class:
+         */
+        $existingImage = $product->getImage();
+        if ($existingImage) {
+            $product->setImage(
+                new File($this->getParameter('foggyline_catalog_images_directory') . '/' . $existingImage)
+            );
+        }
+
         $deleteForm = $this->createDeleteForm($product);
         $editForm = $this->createForm('Foggyline\CatalogBundle\Form\ProductType', $product);
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
+            /* @var $image \Symfony\Component\HttpFoundation\File\UploadedFile */
+            if ($image = $product->getImage()) {
+                $name = $this->get('foggyline_catalog.image_uploader')->upload($image);
+                $product->setImage($name);
+            } elseif ($existingImage) {
+                $product->setImage($existingImage);
+            }
+
             $em = $this->getDoctrine()->getManager();
             $em->persist($product);
             $em->flush();

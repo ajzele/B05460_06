@@ -4,6 +4,7 @@ namespace Foggyline\CatalogBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Foggyline\CatalogBundle\Entity\Category;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Product
@@ -74,6 +75,7 @@ class Product
      * @var string
      *
      * @ORM\Column(name="image", type="string", length=255, nullable=true)
+     * @Assert\File(mimeTypes={ "image/png", "image/jpeg" }, mimeTypesMessage="Please upload the image as either PNG or JPEG file.")
      */
     private $image;
 
