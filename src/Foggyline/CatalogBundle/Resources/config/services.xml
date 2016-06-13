@@ -15,6 +15,15 @@
             <argument>%foggyline_catalog_images_directory%</argument>
         </service>
 
+        <service id="foggyline_catalog.category_menu" class="Foggyline\CatalogBundle\Service\Menu\Category">
+            <argument type="service" id="doctrine.orm.entity_manager" />
+        </service>
+
+        <service id="foggyline_catalog.onsale" class="Foggyline\CatalogBundle\Service\Menu\OnSale">
+            <argument type="service" id="doctrine.orm.entity_manager" />
+        </service>
+
     </services>
+
 
 </container>

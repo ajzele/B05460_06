@@ -75,9 +75,16 @@ class Product
      * @var string
      *
      * @ORM\Column(name="image", type="string", length=255, nullable=true)
-     * @Assert\File(mimeTypes={ "image/png", "image/jpeg" }, mimeTypesMessage="Please upload the image as either PNG or JPEG file.")
+     * @Assert\File(mimeTypes={ "image/png", "image/jpeg" }, mimeTypesMessage="Please upload the PNG or JPEG image file.")
      */
     private $image;
+
+    /**
+     * @var bool
+     *
+     * @ORM\Column(name="onsale", type="boolean")
+     */
+    private $onsale;
 
 
     /**
@@ -280,6 +287,30 @@ class Product
     public function getImage()
     {
         return $this->image;
+    }
+
+    /**
+     * Set onsale
+     *
+     * @param boolean $onsale
+     *
+     * @return Teeest
+     */
+    public function setOnsale($onsale)
+    {
+        $this->onsale = $onsale;
+
+        return $this;
+    }
+
+    /**
+     * Get onsale
+     *
+     * @return bool
+     */
+    public function getOnsale()
+    {
+        return $this->onsale;
     }
 }
 
