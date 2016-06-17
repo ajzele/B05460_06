@@ -5,10 +5,15 @@ namespace Foggyline\CatalogBundle\Service\Menu;
 class Category
 {
     private $em;
+    private $router;
 
-    public function __construct(\Doctrine\ORM\EntityManager $entityManager)
+    public function __construct(
+        \Doctrine\ORM\EntityManager $entityManager,
+        \Symfony\Bundle\FrameworkBundle\Routing\Router $router
+    )
     {
         $this->em = $entityManager;
+        $this->router = $router;
     }
 
     public function getItems()
@@ -19,7 +24,7 @@ class Category
         foreach ($_categories as $_category) {
             /* @var $_category \Foggyline\CatalogBundle\Entity\Category */
             $categories[] = array(
-                'path' => $_category->getUrlKey(),
+                'path' => $this->router->generate('category_show', array('id' => $_category->getId())),
                 'label' => $_category->getTitle(),
             );
         }

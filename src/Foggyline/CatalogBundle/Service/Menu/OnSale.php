@@ -7,24 +7,29 @@ class OnSale
     private $em;
     private $router;
 
-    public function __construct(\Doctrine\ORM\EntityManager $entityManager)
+    public function __construct(\Doctrine\ORM\EntityManager $entityManager, $router)
     {
         $this->em = $entityManager;
+        $this->router = $router;
     }
 
     public function getItems()
     {
         $products = array();
-        $_products = $this->em->getRepository('FoggylineCatalogBundle:Product')->findBy(array('onsale' => true));
+        $_products = $this->em->getRepository('FoggylineCatalogBundle:Product')->findBy(
+            array('onsale' => true),
+            null,
+            5
+        );
 
         foreach ($_products as $_product) {
             /* @var $_product \Foggyline\CatalogBundle\Entity\Product */
             $products[] = array(
-                'path' => $_product->getUrlKey(),
+                'path' => $this->router->generate('product_show', array('id' => $_product->getId())),
                 'name' => $_product->getTitle(),
-                'img' => $_product->getImage(),
+                'image' => $_product->getImage(),
                 'price' => $_product->getPrice(),
-                'add_to_cart_url' => $_product->getUrlKey(),
+                'id' => $_product->getId(),
             );
         }
 
