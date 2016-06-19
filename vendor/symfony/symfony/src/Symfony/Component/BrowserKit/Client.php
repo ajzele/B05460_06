@@ -285,6 +285,7 @@ abstract class Client
 
         $uri = $this->getAbsoluteUri($uri);
 
+
         $server = array_merge($this->server, $server);
 
         if (isset($server['HTTPS'])) {

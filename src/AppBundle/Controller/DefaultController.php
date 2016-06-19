@@ -13,6 +13,7 @@ use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 
 class DefaultController extends Controller
 {
@@ -98,6 +99,38 @@ class DefaultController extends Controller
         // Render "contact us" page
         return $this->render('AppBundle:default:contact.html.twig', array(
             'form' => $form->createView()
+        ));
+    }
+
+    /**
+     * Creates a new Category entity.
+     *
+     * @Route("/new-category", name="category_new")
+     * @Method({"GET", "POST"})
+     */
+    public function newAction(Request $request)
+    {
+        $category = new \Foggyline\CatalogBundle\Entity\Category();
+        $form = $this->createForm('Foggyline\CatalogBundle\Form\CategoryType', $category);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            /* @var $image \Symfony\Component\HttpFoundation\File\UploadedFile */
+            if ($image = $category->getImage()) {
+                $name = $this->get('foggyline_catalog.image_uploader')->upload($image);
+                $category->setImage($name);
+            }
+
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($category);
+            $em->flush();
+
+            return $this->redirectToRoute('category_show', array('id' => $category->getId()));
+        }
+
+        return $this->render('FoggylineCatalogBundle:default:category/new.html.twig', array(
+            'category' => $category,
+            'form' => $form->createView(),
         ));
     }
 }

@@ -182,8 +182,6 @@ class ContainerBuilder extends Container implements TaggedContainerInterface
      */
     public function hasExtension($name)
     {
-
-
         return isset($this->extensions[$name]) || isset($this->extensionsByNs[$name]);
     }
 
