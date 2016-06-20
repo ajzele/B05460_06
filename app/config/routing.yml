@@ -1,7 +1,3 @@
-foggyline_customer:
-    resource: "@FoggylineCustomerBundle/Resources/config/routing.xml"
-    prefix:   /customer/
-
 foggyline_catalog_product:
     resource: "@FoggylineCatalogBundle/Controller/ProductController.php"
     type:     annotation
