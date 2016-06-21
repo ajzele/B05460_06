@@ -3,6 +3,8 @@
 namespace Foggyline\CustomerBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Customer
@@ -10,7 +12,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="customer")
  * @ORM\Entity(repositoryClass="Foggyline\CustomerBundle\Repository\CustomerRepository")
  */
-class Customer
+class Customer implements UserInterface, \Serializable
 {
     /**
      * @var int
@@ -27,6 +29,18 @@ class Customer
      * @ORM\Column(name="email", type="string", length=255, unique=true)
      */
     private $email;
+
+    /**
+     * @ORM\Column(type="string", length=255, unique=true)
+     * @Assert\NotBlank()
+     */
+    private $username;
+
+    /**
+     * @Assert\NotBlank()
+     * @Assert\Length(max=4096)
+     */
+    private $plainPassword;
 
     /**
      * @var string
@@ -131,6 +145,16 @@ class Customer
     public function getEmail()
     {
         return $this->email;
+    }
+
+    public function getPlainPassword()
+    {
+        return $this->plainPassword;
+    }
+
+    public function setPlainPassword($password)
+    {
+        $this->plainPassword = $password;
     }
 
     /**
@@ -371,6 +395,62 @@ class Customer
     public function getStreet()
     {
         return $this->street;
+    }
+
+    public function getUsername()
+    {
+        return $this->username;
+    }
+
+    public function setUsername($username)
+    {
+        $this->username = $username;
+    }
+
+
+    public function getSalt()
+    {
+        /**
+         * Do you need to use a Salt property?
+         * If you use bcrypt, no. Otherwise, yes.
+         * All passwords must be hashed with a salt, but bcrypt does this internally.
+         * Since this tutorial does use bcrypt, the getSalt() method in User can just return null (it's not used).
+         * If you use a different algorithm, you'll need to uncomment the salt lines in the User entity and add a persisted salt property.
+         */
+        return null;
+    }
+
+    public function getRoles()
+    {
+        return array('ROLE_USER');
+    }
+
+    public function eraseCredentials()
+    {
+    }
+
+    /** @see \Serializable::serialize() */
+    public function serialize()
+    {
+        return serialize(array(
+            $this->id,
+            $this->username,
+            $this->password,
+            // see section on salt below
+            // $this->salt,
+        ));
+    }
+
+    /** @see \Serializable::unserialize() */
+    public function unserialize($serialized)
+    {
+        list (
+            $this->id,
+            $this->username,
+            $this->password,
+            // see section on salt below
+            // $this->salt
+            ) = unserialize($serialized);
     }
 }
 

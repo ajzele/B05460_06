@@ -17,6 +17,66 @@ use Foggyline\CustomerBundle\Form\CustomerType;
 class CustomerController extends Controller
 {
     /**
+     * Creates a new Customer entity.
+     *
+     * @Route("/login", name="foggyline_customer_login")
+     */
+    public function loginAction(Request $request)
+    {
+        $authenticationUtils = $this->get('security.authentication_utils');
+
+        // get the login error if there is one
+        $error = $authenticationUtils->getLastAuthenticationError();
+
+        // last username entered by the user
+        $lastUsername = $authenticationUtils->getLastUsername();
+
+        return $this->render(
+            'FoggylineCustomerBundle:default:customer/login.html.twig',
+            array(
+                // last username entered by the user
+                'last_username' => $lastUsername,
+                'error'         => $error,
+            )
+        );
+    }
+
+    /**
+     * @Route("/register", name="foggyline_customer_register")
+     */
+    public function registerAction(Request $request)
+    {
+        // 1) build the form
+        $user = new Customer();
+        $form = $this->createForm(CustomerType::class, $user);
+
+        // 2) handle the submit (will only happen on POST)
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            // 3) Encode the password (you could also do this via Doctrine listener)
+            $password = $this->get('security.password_encoder')
+                ->encodePassword($user, $user->getPlainPassword());
+            $user->setPassword($password);
+
+            // 4) save the User!
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($user);
+            $em->flush();
+
+            // ... do any other work - like sending them an email, etc
+            // maybe set a "flash" success message for the user
+
+            return $this->redirectToRoute('customer_index');
+        }
+
+        return $this->render(
+            'FoggylineCustomerBundle:default:customer/register.html.twig',
+            array('form' => $form->createView())
+        );
+    }
+
+    /**
      * Lists all Customer entities.
      *
      * @Route("/", name="customer_index")
@@ -78,7 +138,7 @@ class CustomerController extends Controller
     /**
      * Displays a form to edit an existing Customer entity.
      *
-     * @Route("/{id}/edit", name="customer_edit")
+     * @Route("/edit/{id}", name="customer_edit")
      * @Method({"GET", "POST"})
      */
     public function editAction(Request $request, Customer $customer)
@@ -137,4 +197,6 @@ class CustomerController extends Controller
             ->getForm()
         ;
     }
+
+
 }
