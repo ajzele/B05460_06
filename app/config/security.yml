@@ -13,6 +13,8 @@ security:
                         password: $2y$12$DFozWehwPkp14sVXr7.IbusW8ugvmZs9dQMExlggtyEa/TxZUStnO
                         roles: 'ROLE_ADMIN'
                     # php bin/console security:encode-password
+
+        # Add this #1
         foggyline_customer:
             entity:
                 class: FoggylineCustomerBundle:Customer
@@ -23,18 +25,16 @@ security:
         Symfony\Component\Security\Core\User\User:
             algorithm: bcrypt
             cost: 12
+        # Add this #2
         Foggyline\CustomerBundle\Entity\Customer:
             algorithm: bcrypt
             cost: 12
 
     firewalls:
 
-
-
+        # Add this #3
         foggyline_customer:
             anonymous: ~
-#            pattern: /customer/edit
-#            http_basic:
             provider: foggyline_customer
             form_login:
                 login_path: foggyline_customer_login
@@ -49,11 +49,11 @@ security:
             anonymous: ~
             http_basic: ~
 
-
-
     access_control:
         # exclude /login path from firewall
-        - { path: /login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: /customer/account, roles: ROLE_USER }
+        - { path: /customer/, roles: ROLE_ADMIN }
+#        - { path: /login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         # protect any possible auto-generated CRUD actions from everyone's access
         - { path: /new, roles: ROLE_ADMIN }
         - { path: /edit, roles: ROLE_ADMIN }

@@ -77,6 +77,41 @@ class CustomerController extends Controller
     }
 
     /**
+     * Finds and displays a Customer entity.
+     *
+     * @Route("/account", name="customer_account")
+     * @Method({"GET", "POST"})
+     */
+    public function accountAction(Request $request)
+    {
+        if (!$this->get('security.authorization_checker')->isGranted('ROLE_USER')) {
+            throw $this->createAccessDeniedException();
+        }
+
+        if ($customer = $this->getUser()) {
+
+            $editForm = $this->createForm('Foggyline\CustomerBundle\Form\CustomerType', $customer);
+            $editForm->handleRequest($request);
+
+            if ($editForm->isSubmitted() && $editForm->isValid()) {
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($customer);
+                $em->flush();
+
+                return $this->redirectToRoute('customer_edit', array('id' => $customer->getId()));
+            }
+
+            return $this->render('FoggylineCustomerBundle:default:customer/account.html.twig', array(
+                'customer' => $customer,
+                'edit_form' => $editForm->createView(),
+            ));
+        } else {
+            $this->addFlash('notice', 'Only logged in customers can access account page.');
+            return $this->redirectToRoute('foggyline_customer_login');
+        }
+    }
+
+    /**
      * Lists all Customer entities.
      *
      * @Route("/", name="customer_index")
@@ -135,10 +170,12 @@ class CustomerController extends Controller
         ));
     }
 
+
+
     /**
      * Displays a form to edit an existing Customer entity.
      *
-     * @Route("/edit/{id}", name="customer_edit")
+     * @Route("/{id}/edit", name="customer_edit")
      * @Method({"GET", "POST"})
      */
     public function editAction(Request $request, Customer $customer)
