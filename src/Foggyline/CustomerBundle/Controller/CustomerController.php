@@ -108,6 +108,7 @@ class CustomerController extends Controller
             return $this->render('FoggylineCustomerBundle:default:customer/account.html.twig', array(
                 'customer' => $customer,
                 'form' => $editForm->createView(),
+                'customer_orders' => $this->get('foggyline_customer.customer_orders')->getOrders()
             ));
         } else {
             $this->addFlash('notice', 'Only logged in customers can access account page.');

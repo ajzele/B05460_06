@@ -9,6 +9,8 @@
             <argument type="service" id="security.token_storage"/>
             <argument type="service" id="router"/>
         </service>
+        <service id="foggyline_customer.customer_orders" class="Foggyline\CustomerBundle\Service\CustomerOrders">
+        </service>
     </services>
 
 </container>
