@@ -8,6 +8,9 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Foggyline\CustomerBundle\Entity\Customer;
 use Foggyline\CustomerBundle\Form\CustomerType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Validator\Constraints\Email;
 
 /**
  * Customer controller.
@@ -90,7 +93,7 @@ class CustomerController extends Controller
 
         if ($customer = $this->getUser()) {
 
-            $editForm = $this->createForm('Foggyline\CustomerBundle\Form\CustomerType', $customer);
+            $editForm = $this->createForm('Foggyline\CustomerBundle\Form\CustomerType', $customer, array( 'action' => $this->generateUrl('customer_account')));
             $editForm->handleRequest($request);
 
             if ($editForm->isSubmitted() && $editForm->isValid()) {
@@ -98,18 +101,66 @@ class CustomerController extends Controller
                 $em->persist($customer);
                 $em->flush();
 
-                return $this->redirectToRoute('customer_edit', array('id' => $customer->getId()));
+                $this->addFlash('success', 'Account updated.');
+                return $this->redirectToRoute('customer_account');
             }
 
             return $this->render('FoggylineCustomerBundle:default:customer/account.html.twig', array(
                 'customer' => $customer,
-                'edit_form' => $editForm->createView(),
+                'form' => $editForm->createView(),
             ));
         } else {
             $this->addFlash('notice', 'Only logged in customers can access account page.');
             return $this->redirectToRoute('foggyline_customer_login');
         }
     }
+
+    /**
+     * @Route("/forgotten_password", name="customer_forgotten_password")
+     * @Method({"GET", "POST"})
+     */
+    public function forgottenPasswordAction(Request $request)
+    {
+
+        // Build a form, with validation rules in place
+        $form = $this->createFormBuilder()
+            ->add('email', EmailType::class, array(
+                'constraints' => new Email()
+            ))
+            ->add('save', SubmitType::class, array(
+                'label' => 'Reset!',
+                'attr' => array('class' => 'button'),
+            ))
+            ->getForm();
+
+        // Check if this is a POST type request and if so, handle form
+        if ($request->isMethod('POST')) {
+            $form->handleRequest($request);
+
+            if ($form->isSubmitted() && $form->isValid()) {
+                $this->addFlash('success', 'Please check your email for reset password.');
+
+                // todo: Send an email out to website admin or something...
+
+                return $this->redirect($this->generateUrl('foggyline_customer_login'));
+            }
+        }
+
+        // Render "contact us" page
+        return $this->render('FoggylineCustomerBundle:default:customer/forgotten_password.html.twig', array(
+            'form' => $form->createView()
+        ));
+    }
+
+    /**
+     * @Route("/logout", name="customer_logout")
+     */
+    public function logoutAction()
+    {
+        // The code here won’t actually get hit. Symfony intercepts the request and processes the logout for us.
+    }
+
+
 
     /**
      * Lists all Customer entities.
@@ -234,6 +285,7 @@ class CustomerController extends Controller
             ->getForm()
         ;
     }
+
 
 
 }

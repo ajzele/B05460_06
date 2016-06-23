@@ -7,6 +7,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\CountryType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 
@@ -31,7 +32,7 @@ class CustomerType extends AbstractType
             ->add('lastName')
             ->add('company')
             ->add('phoneNumber')
-            ->add('country')
+            ->add('country', CountryType::class)
             ->add('state')
             ->add('city')
             ->add('postcode')
