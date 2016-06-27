@@ -429,15 +429,13 @@ class Customer implements UserInterface, \Serializable
     {
     }
 
-    /** @see \Serializable::serialize() */
+
     public function serialize()
     {
         return serialize(array(
             $this->id,
             $this->username,
-            $this->password,
-            // see section on salt below
-            // $this->salt,
+            $this->password
         ));
     }
 
@@ -448,9 +446,7 @@ class Customer implements UserInterface, \Serializable
             $this->id,
             $this->username,
             $this->password,
-            // see section on salt below
-            // $this->salt
-            ) = unserialize($serialized);
+        ) = unserialize($serialized);
     }
 }
 

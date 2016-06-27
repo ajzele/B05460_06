@@ -19,9 +19,11 @@ class CustomerMenu
     public function getItems()
     {
         $items = array();
-        $user = $this->token->getUser();
 
-        if ($user instanceof \Foggyline\CustomerBundle\Entity\Customer) {
+        if ($this->token
+            && $this->token->getUser() instanceof \Foggyline\CustomerBundle\Entity\Customer
+        ) {
+            $user = $this->token->getUser();
             // customer authentication
             $items[] = array(
                 'path' => $this->router->generate('customer_account'),

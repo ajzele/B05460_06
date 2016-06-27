@@ -24,23 +24,6 @@ class CustomerOrders
                     )
                 )
             ),
-            array(
-                'id' => '0000000002',
-                'date' => '18/06/2016 12:15',
-                'ship_to' => 'John Doe',
-                'order_total' => 149.99,
-                'status' => 'Pending',
-                'actions' => array(
-                    array(
-                        'label' => 'Cancel',
-                        'path' => '#'
-                    ),
-                    array(
-                        'label' => 'Print',
-                        'path' => '#'
-                    )
-                )
-            ),
         );
     }
 }
