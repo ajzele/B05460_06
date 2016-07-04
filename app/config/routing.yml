@@ -1,3 +1,7 @@
+foggyline_payment:
+    resource: "@FoggylinePaymentBundle/Resources/config/routing.xml"
+    prefix:   /payment/
+
 foggyline_customer_customer:
     resource: "@FoggylineCustomerBundle/Controller/CustomerController.php"
     type:     annotation
