@@ -2,6 +2,10 @@ foggyline_payment_card:
     resource: "@FoggylinePaymentBundle/Controller/CardController.php"
     type:     annotation
 
+foggyline_payment_card:
+    resource: "@FoggylinePaymentBundle/Controller/CheckMoneyController.php"
+    type:     annotation
+
 foggyline_payment:
     resource: "@FoggylinePaymentBundle/Resources/config/routing.xml"
     prefix:   /payment/
