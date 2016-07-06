@@ -9,15 +9,14 @@
         <service id="foggyline_payment.card_payment" class="Foggyline\PaymentBundle\Service\CardPayment">
             <argument type="service" id="form.factory"/>
             <argument type="service" id="router"/>
-            <tag name="payment_method" />
+            <tag name="payment_method"/>
         </service>
 
         <service id="foggyline_payment.check_money" class="Foggyline\PaymentBundle\Service\CheckMoneyPayment">
             <argument type="service" id="router"/>
-            <tag name="payment_method" />
+            <tag name="payment_method"/>
         </service>
     </services>
-
 
 
 </container>

@@ -5,6 +5,7 @@ namespace Foggyline\PaymentBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 
 class CardType extends AbstractType
 {
@@ -17,7 +18,7 @@ class CardType extends AbstractType
         $builder
             ->add('cardType')
             ->add('cardNumber')
-            ->add('expiryDate', 'date')
+            ->add('expiryDate', DateType::class)
             ->add('securityCode')
         ;
     }

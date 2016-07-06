@@ -2,8 +2,6 @@
 
 namespace Foggyline\PaymentBundle\Service;
 
-use Foggyline\PaymentBundle\Entity\Card;
-
 class CheckMoneyPayment
 {
     private $router;
@@ -18,10 +16,14 @@ class CheckMoneyPayment
     public function getInfo()
     {
         return array(
-            'title' => 'Foggyline Check Money Payment',
-            'code' => 'check_money',
-            'process_url' => $this->router->generate('check_money_process'),
-            'form' => ''
+            'payment' => array(
+                'title' => 'Foggyline Check Money Payment',
+                'code' => 'check_money',
+                'url_authorize' => $this->router->generate('foggyline_payment_check_money_authorize'),
+                'url_capture' => $this->router->generate('foggyline_payment_check_money_capture'),
+                'url_cancel' => $this->router->generate('foggyline_payment_check_money_cancel'),
+                //'form' => ''
+            )
         );
     }
 }

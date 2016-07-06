@@ -2,29 +2,39 @@
 
 namespace Foggyline\PaymentBundle\Controller;
 
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Foggyline\PaymentBundle\Entity\Card;
-use Foggyline\PaymentBundle\Form\CardType;
 
-/**
- * Check Money controller.
- *
- * @Route("/check_money")
- */
 class CheckMoneyController extends Controller
 {
-
-    /**
-     * Creates a new Card entity.
-     *
-     * @Route("/process", name="check_money_process")
-     * @Method({"GET", "POST"})
-     */
-    public function processAction(Request $request)
+    public function authorizeAction(Request $request)
     {
-        // do something, then return json error or success
+        // Imagine we are calling the real payment processor API here, and getting some transaction id back
+        $transaction = md5(time() . uniqid()); // Just a dummy string, simulating some transaction id, if any
+
+        return new JsonResponse(array(
+            'success' => $transaction
+        ));
+    }
+
+    public function captureAction(Request $request)
+    {
+        // Imagine we are calling the real payment processor API here, and getting some transaction id back
+        $transaction = md5(time() . uniqid()); // Just a dummy string, simulating some transaction id, if any
+
+        return new JsonResponse(array(
+            'success' => $transaction
+        ));
+    }
+
+    public function cancelAction(Request $request)
+    {
+        // Imagine we are calling the real payment processor API here, and getting some transaction id back
+        $transaction = md5(time() . uniqid()); // Just a dummy string, simulating some transaction id, if any
+
+        return new JsonResponse(array(
+            'success' => $transaction
+        ));
     }
 }

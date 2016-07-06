@@ -29,10 +29,14 @@ class CardPayment
         // Sales module then saves in its orders table: code and transaction_id
 
         return array(
-            'title' => 'Foggyline Card Payment',
-            'code' => 'card_payment',
-            'process_url' => $this->router->generate('card_process'),
-            'form' => $form->createView()
+            'payment' => array(
+                'title' => 'Foggyline Card Payment',
+                'code' => 'card_payment',
+                'url_authorize' => $this->router->generate('foggyline_payment_card_authorize'),
+                'url_capture' => $this->router->generate('foggyline_payment_card_capture'),
+                'url_cancel' => $this->router->generate('foggyline_payment_card_cancel'),
+                'form' => $form->createView()
+            )
         );
     }
 }
