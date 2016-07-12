@@ -1,4 +1,8 @@
 foggyline_payment:
+    resource: "@FoggylineShipmentBundle/Resources/config/routing.xml"
+    prefix:   /shipment/
+
+foggyline_payment:
     resource: "@FoggylinePaymentBundle/Resources/config/routing.xml"
     prefix:   /payment/
 
