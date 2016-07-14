@@ -16,26 +16,9 @@ class DynamicRateControllerTest extends WebTestCase
         $this->router = $this->client->getContainer()->get('router');
     }
 
-    public function testAuthorizeAction()
+    public function testProcessAction()
     {
-        $this->client->request('GET', $this->router->generate('foggyline_shipment_dynamic_rate_authorize'));
-        $this->assertTests();
-    }
-
-    public function testCaptureAction()
-    {
-        $this->client->request('GET', $this->router->generate('foggyline_shipment_dynamic_rate_capture'));
-        $this->assertTests();
-    }
-
-    public function testCancelAction()
-    {
-        $this->client->request('GET', $this->router->generate('foggyline_shipment_dynamic_rate_cancel'));
-        $this->assertTests();
-    }
-
-    private function assertTests()
-    {
+        $this->client->request('GET', $this->router->generate('foggyline_shipment_dynamic_rate_process'));
         $this->assertSame(200, $this->client->getResponse()->getStatusCode());
         $this->assertSame('application/json', $this->client->getResponse()->headers->get('Content-Type'));
         $this->assertContains('success', $this->client->getResponse()->getContent());

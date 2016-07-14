@@ -5,7 +5,7 @@ namespace Foggyline\ShipmentBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 class DynamicRateType extends AbstractType
 {
@@ -15,14 +15,17 @@ class DynamicRateType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder
-            ->add('dynamicrateType')
-            ->add('dynamicrateNumber')
-            ->add('expiryDate', DateType::class)
-            ->add('securityCode')
-        ;
+        $builder->add('delivery_options', ChoiceType::class, array(
+            'choices' => array(
+                'English' => 'en',
+                'Spanish' => 'es',
+                'Bork'   => 'muppets',
+                'Pirate' => 'arr'
+            ),
+            'expanded' => true,
+        ));
     }
-    
+
     /**
      * @param OptionsResolver $resolver
      */

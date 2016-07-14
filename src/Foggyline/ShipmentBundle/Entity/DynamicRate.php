@@ -24,31 +24,9 @@ class DynamicRate
     /**
      * @var string
      *
-     * @ORM\Column(name="dynamicrate_type", type="string", length=255)
+     * @ORM\Column(name="delivery_options", type="string", length=255, unique=false)
      */
-    private $dynamicrateType;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="dynamicrate_number", type="string", length=255)
-     */
-    private $dynamicrateNumber;
-
-    /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="expiry_date", type="date")
-     */
-    private $expiryDate;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="security_code", type="string", length=255)
-     */
-    private $securityCode;
-
+    private $deliveryOptions;
 
     /**
      * Get id
@@ -60,100 +38,9 @@ class DynamicRate
         return $this->id;
     }
 
-    /**
-     * Set dynamicrateType
-     *
-     * @param string $dynamicrateType
-     *
-     * @return DynamicRate
-     */
-    public function setDynamicRateType($dynamicrateType)
+    public function getDeliveryOptions()
     {
-        $this->dynamicrateType = $dynamicrateType;
-
-        return $this;
-    }
-
-    /**
-     * Get dynamicrateType
-     *
-     * @return string
-     */
-    public function getDynamicRateType()
-    {
-        return $this->dynamicrateType;
-    }
-
-    /**
-     * Set dynamicrateNumber
-     *
-     * @param string $dynamicrateNumber
-     *
-     * @return DynamicRate
-     */
-    public function setDynamicRateNumber($dynamicrateNumber)
-    {
-        $this->dynamicrateNumber = $dynamicrateNumber;
-
-        return $this;
-    }
-
-    /**
-     * Get dynamicrateNumber
-     *
-     * @return string
-     */
-    public function getDynamicRateNumber()
-    {
-        return $this->dynamicrateNumber;
-    }
-
-    /**
-     * Set expiryDate
-     *
-     * @param \DateTime $expiryDate
-     *
-     * @return DynamicRate
-     */
-    public function setExpiryDate($expiryDate)
-    {
-        $this->expiryDate = $expiryDate;
-
-        return $this;
-    }
-
-    /**
-     * Get expiryDate
-     *
-     * @return \DateTime
-     */
-    public function getExpiryDate()
-    {
-        return $this->expiryDate;
-    }
-
-    /**
-     * Set securityCode
-     *
-     * @param string $securityCode
-     *
-     * @return DynamicRate
-     */
-    public function setSecurityCode($securityCode)
-    {
-        $this->securityCode = $securityCode;
-
-        return $this;
-    }
-
-    /**
-     * Get securityCode
-     *
-     * @return string
-     */
-    public function getSecurityCode()
-    {
-        return $this->securityCode;
+        return $this->deliveryOptions;
     }
 }
 
