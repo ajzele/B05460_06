@@ -7,7 +7,6 @@
 
     <services>
         <service id="foggyline_shipment.dynamicrate_shipment" class="Foggyline\ShipmentBundle\Service\DynamicRateShipment">
-            <argument type="service" id="form.factory"/>
             <argument type="service" id="router"/>
             <tag name="shipment_method"/>
         </service>

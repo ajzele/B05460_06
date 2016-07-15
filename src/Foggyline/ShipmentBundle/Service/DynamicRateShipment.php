@@ -2,21 +2,14 @@
 
 namespace Foggyline\ShipmentBundle\Service;
 
-use Foggyline\ShipmentBundle\Entity\DynamicRate;
-use Symfony\Component\Form\Extension\Core\Type\FormType;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-
 class DynamicRateShipment
 {
-    private $formFactory;
     private $router;
 
     public function __construct(
-        $formFactory,
         \Symfony\Bundle\FrameworkBundle\Routing\Router $router
     )
     {
-        $this->formFactory = $formFactory;
         $this->router = $router;
     }
 

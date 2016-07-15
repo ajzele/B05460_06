@@ -20,7 +20,6 @@ class DynamicRateController extends Controller
          * Meaning, we would send the address details, amount, qty and desired delivery option to API now
          */
 
-        // Incoming request should/might contain the DynamicRateType form
         // Imagine we are calling the real shipment processor API here, and getting some transaction id back
         $transaction = md5(time() . uniqid()); // Just a dummy string, simulating some transaction id, if any
 
