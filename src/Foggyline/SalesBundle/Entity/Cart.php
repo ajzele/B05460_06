@@ -42,6 +42,15 @@ class Cart
     private $modifiedAt;
 
     /**
+     * @ORM\OneToMany(targetEntity="CartItem", mappedBy="cart")
+     */
+    private $items;
+
+    public function __construct() {
+        $this->items = new ArrayCollection();
+    }
+
+    /**
      * Get id
      *
      * @return int
