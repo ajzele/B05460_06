@@ -5,12 +5,12 @@ namespace Foggyline\SalesBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Cart
+ * CartItem
  *
- * @ORM\Table(name="cart")
- * @ORM\Entity(repositoryClass="Foggyline\SalesBundle\Repository\CartRepository")
+ * @ORM\Table(name="cart_item")
+ * @ORM\Entity(repositoryClass="Foggyline\SalesBundle\Repository\CartItemRepository")
  */
-class Cart
+class CartItem
 {
     /**
      * @var int
@@ -22,10 +22,24 @@ class Cart
     private $id;
 
     /**
-     * @ORM\OneToOne(targetEntity="Foggyline\CustomerBundle\Entity\Customer")
-     * @ORM\JoinColumn(name="customer_id", referencedColumnName="id")
+     * @ORM\ManyToOne(targetEntity="Cart", inversedBy="items")
+     * @ORM\JoinColumn(name="cart_id", referencedColumnName="id")
      */
-    private $customer;
+    private $cart;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="qty", type="integer")
+     */
+    private $qty;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="unit_price", type="decimal", precision=10, scale=4)
+     */
+    private $unitPrice;
 
     /**
      * @var \DateTime
@@ -41,6 +55,7 @@ class Cart
      */
     private $modifiedAt;
 
+
     /**
      * Get id
      *
@@ -52,27 +67,75 @@ class Cart
     }
 
     /**
-     * Set customer
+     * Set cart
      *
-     * @param integer $customer
+     * @param integer $cart
      *
-     * @return Cart
+     * @return CartItem
      */
-    public function setCustomer($customer)
+    public function setCart($cart)
     {
-        $this->customer = $customer;
+        $this->cart = $cart;
 
         return $this;
     }
 
     /**
-     * Get customer
+     * Get cart
      *
      * @return int
      */
-    public function getCustomer()
+    public function getCart()
     {
-        return $this->customer;
+        return $this->cart;
+    }
+
+    /**
+     * Set qty
+     *
+     * @param integer $qty
+     *
+     * @return CartItem
+     */
+    public function setQty($qty)
+    {
+        $this->qty = $qty;
+
+        return $this;
+    }
+
+    /**
+     * Get qty
+     *
+     * @return int
+     */
+    public function getQty()
+    {
+        return $this->qty;
+    }
+
+    /**
+     * Set unitPrice
+     *
+     * @param string $unitPrice
+     *
+     * @return CartItem
+     */
+    public function setUnitPrice($unitPrice)
+    {
+        $this->unitPrice = $unitPrice;
+
+        return $this;
+    }
+
+    /**
+     * Get unitPrice
+     *
+     * @return string
+     */
+    public function getUnitPrice()
+    {
+        return $this->unitPrice;
     }
 
     /**
@@ -80,7 +143,7 @@ class Cart
      *
      * @param \DateTime $createdAt
      *
-     * @return Cart
+     * @return CartItem
      */
     public function setCreatedAt($createdAt)
     {
@@ -104,7 +167,7 @@ class Cart
      *
      * @param \DateTime $modifiedAt
      *
-     * @return Cart
+     * @return CartItem
      */
     public function setModifiedAt($modifiedAt)
     {
