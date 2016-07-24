@@ -5,12 +5,12 @@ namespace Foggyline\SalesBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * CartItem
+ * SalesOrderItem
  *
- * @ORM\Table(name="cart_item")
- * @ORM\Entity(repositoryClass="Foggyline\SalesBundle\Repository\CartItemRepository")
+ * @ORM\Table(name="sales_order_item")
+ * @ORM\Entity(repositoryClass="Foggyline\SalesBundle\Repository\SalesOrderItemRepository")
  */
-class CartItem
+class SalesOrderItem
 {
     /**
      * @var int
@@ -22,16 +22,23 @@ class CartItem
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Cart", inversedBy="items")
-     * @ORM\JoinColumn(name="cart_id", referencedColumnName="id")
+     * @ORM\ManyToOne(targetEntity="SalesOrder", inversedBy="items")
+     * @ORM\JoinColumn(name="sales_order_id", referencedColumnName="id")
      */
-    private $cart;
+    private $salesOrder;
 
     /**
      * @ORM\OneToOne(targetEntity="Foggyline\CatalogBundle\Entity\Product")
      * @ORM\JoinColumn(name="product_id", referencedColumnName="id")
      */
     private $product;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="title", type="string", length=255)
+     */
+    private $title;
 
     /**
      * @var int
@@ -46,6 +53,13 @@ class CartItem
      * @ORM\Column(name="unit_price", type="decimal", precision=10, scale=4)
      */
     private $unitPrice;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="total_price", type="decimal", precision=10, scale=4)
+     */
+    private $totalPrice;
 
     /**
      * @var \DateTime
@@ -73,27 +87,75 @@ class CartItem
     }
 
     /**
-     * Set cart
+     * Set salesOrder
      *
-     * @param integer $cart
+     * @param integer $salesOrder
      *
-     * @return CartItem
+     * @return SalesOrderItem
      */
-    public function setCart($cart)
+    public function setSalesOrder($salesOrder)
     {
-        $this->cart = $cart;
+        $this->salesOrder = $salesOrder;
 
         return $this;
     }
 
     /**
-     * Get cart
+     * Get salesOrder
      *
      * @return int
      */
-    public function getCart()
+    public function getSalesOrder()
     {
-        return $this->cart;
+        return $this->salesOrder;
+    }
+
+    /**
+     * Set product
+     *
+     * @param integer $product
+     *
+     * @return SalesOrderItem
+     */
+    public function setProduct($product)
+    {
+        $this->product = $product;
+
+        return $this;
+    }
+
+    /**
+     * Get product
+     *
+     * @return int
+     */
+    public function getProduct()
+    {
+        return $this->product;
+    }
+
+    /**
+     * Set title
+     *
+     * @param string $title
+     *
+     * @return SalesOrderItem
+     */
+    public function setTitle($title)
+    {
+        $this->title = $title;
+
+        return $this;
+    }
+
+    /**
+     * Get title
+     *
+     * @return string
+     */
+    public function getTitle()
+    {
+        return $this->title;
     }
 
     /**
@@ -101,7 +163,7 @@ class CartItem
      *
      * @param integer $qty
      *
-     * @return CartItem
+     * @return SalesOrderItem
      */
     public function setQty($qty)
     {
@@ -125,7 +187,7 @@ class CartItem
      *
      * @param string $unitPrice
      *
-     * @return CartItem
+     * @return SalesOrderItem
      */
     public function setUnitPrice($unitPrice)
     {
@@ -145,11 +207,35 @@ class CartItem
     }
 
     /**
+     * Set totalPrice
+     *
+     * @param string $totalPrice
+     *
+     * @return SalesOrderItem
+     */
+    public function setTotalPrice($totalPrice)
+    {
+        $this->totalPrice = $totalPrice;
+
+        return $this;
+    }
+
+    /**
+     * Get totalPrice
+     *
+     * @return string
+     */
+    public function getTotalPrice()
+    {
+        return $this->totalPrice;
+    }
+
+    /**
      * Set createdAt
      *
      * @param \DateTime $createdAt
      *
-     * @return CartItem
+     * @return SalesOrderItem
      */
     public function setCreatedAt($createdAt)
     {
@@ -173,7 +259,7 @@ class CartItem
      *
      * @param \DateTime $modifiedAt
      *
-     * @return CartItem
+     * @return SalesOrderItem
      */
     public function setModifiedAt($modifiedAt)
     {

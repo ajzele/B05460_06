@@ -161,6 +161,15 @@ class SalesOrder
      */
     private $addressTelephone;
 
+    /**
+     * @ORM\OneToMany(targetEntity="SalesOrderItem", mappedBy="salesOrder")
+     */
+    private $items;
+
+    public function __construct() {
+        $this->items = new ArrayCollection();
+    }
+
 
     /**
      * Get id
