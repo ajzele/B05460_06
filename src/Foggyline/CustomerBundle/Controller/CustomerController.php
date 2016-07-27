@@ -4,8 +4,8 @@ namespace Foggyline\CustomerBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+    use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+    use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Foggyline\CustomerBundle\Entity\Customer;
 use Foggyline\CustomerBundle\Form\CustomerType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
@@ -111,7 +111,7 @@ class CustomerController extends Controller
                 'customer_orders' => $this->get('foggyline_customer.customer_orders')->getOrders()
             ));
         } else {
-            $this->addFlash('notice', 'Only logged in customers can access account page.');
+            $this->addFlash('warning', 'Only logged in customers can access account page.');
             return $this->redirectToRoute('foggyline_customer_login');
         }
     }

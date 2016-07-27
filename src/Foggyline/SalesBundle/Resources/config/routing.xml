@@ -4,7 +4,24 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://symfony.com/schema/routing http://symfony.com/schema/routing/routing-1.0.xsd">
 
-    <route id="foggyline_sales_homepage" path="/">
-        <default key="_controller">FoggylineSalesBundle:Default:index</default>
+    <route id="foggyline_sales_cart" path="/cart/">
+        <default key="_controller">FoggylineSalesBundle:Cart:index</default>
     </route>
+
+    <route id="foggyline_sales_cart_update" path="/cart/update">
+        <default key="_controller">FoggylineSalesBundle:Cart:update</default>
+    </route>
+
+    <route id="foggyline_sales_cart_add" path="/cart/add/{id}">
+        <default key="_controller">FoggylineSalesBundle:Cart:add</default>
+    </route>
+
+    <route id="foggyline_sales_checkout" path="/checkout/">
+        <default key="_controller">FoggylineSalesBundle:Checkout:index</default>
+    </route>
+
+    <route id="foggyline_sales_checkout_payment" path="/checkout/payment">
+        <default key="_controller">FoggylineSalesBundle:Checkout:payment</default>
+    </route>
+
 </routes>

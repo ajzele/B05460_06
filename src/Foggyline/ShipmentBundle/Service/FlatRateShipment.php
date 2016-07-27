@@ -24,9 +24,11 @@ class FlatRateShipment
                 'title' => 'Foggyline FlatRate Shipment',
                 'code' => 'flat_rate',
                 'delivery_options' => array(
-                    'title' => 'Fixed',
-                    'code' => 'fixed',
-                    'price' => 9.99
+                    array(
+                        'title' => 'Fixed',
+                        'code' => 'fixed',
+                        'price' => 9.99
+                    )
                 ),
                 'url_process' => $this->router->generate('foggyline_shipment_flat_rate_process'),
             )

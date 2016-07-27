@@ -11,7 +11,7 @@
                     <img src="{{ asset(product.img) }}" alt="missing image"/>
                     <a href="{{ product.path }}">{{ product.name }}</a>
                     <div>${{ product.price }}</div>
-                    <div><a class="small button" href="{{ product.add_to_cart_url }}">Add to Cart</a></div>
+                    <div><a class="small button" href="{{ add_to_cart_url.getAddToCartUrl(product.id) }}">Add to Cart</a></div>
                 </div>
             {% endfor %}
         </div>
