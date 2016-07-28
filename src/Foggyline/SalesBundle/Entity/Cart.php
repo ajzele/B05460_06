@@ -47,7 +47,7 @@ class Cart
     private $items;
 
     public function __construct() {
-        $this->items = new ArrayCollection();
+        $this->items = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**

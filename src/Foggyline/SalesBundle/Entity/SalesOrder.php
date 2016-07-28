@@ -12,6 +12,9 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class SalesOrder
 {
+    const STATUS_PROCESSING = 'processing';
+    const STATUS_COMPLETE = 'complete';
+    const STATUS_CANCELED = 'canceled';
     /**
      * @var int
      *
@@ -22,9 +25,8 @@ class SalesOrder
     private $id;
 
     /**
-     * @var int
-     *
-     * @ORM\Column(name="customer", type="integer")
+     * @ORM\ManyToOne(targetEntity="Foggyline\CustomerBundle\Entity\Customer")
+     * @ORM\JoinColumn(name="customer_id", referencedColumnName="id")
      */
     private $customer;
 
@@ -129,7 +131,7 @@ class SalesOrder
     /**
      * @var string
      *
-     * @ORM\Column(name="address_state", type="string", length=255)
+     * @ORM\Column(name="address_state", type="string", length=255, nullable=true)
      */
     private $addressState;
 
@@ -167,7 +169,7 @@ class SalesOrder
     private $items;
 
     public function __construct() {
-        $this->items = new ArrayCollection();
+        $this->items = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
 

@@ -2,7 +2,7 @@ foggyline_sales:
     resource: "@FoggylineSalesBundle/Resources/config/routing.xml"
     prefix:   /sales/
 
-foggyline_payment:
+foggyline_shipment:
     resource: "@FoggylineShipmentBundle/Resources/config/routing.xml"
     prefix:   /shipment/
 

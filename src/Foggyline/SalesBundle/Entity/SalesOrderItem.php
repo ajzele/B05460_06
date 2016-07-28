@@ -28,7 +28,7 @@ class SalesOrderItem
     private $salesOrder;
 
     /**
-     * @ORM\OneToOne(targetEntity="Foggyline\CatalogBundle\Entity\Product")
+     * @ORM\ManyToOne(targetEntity="Foggyline\CatalogBundle\Entity\Product")
      * @ORM\JoinColumn(name="product_id", referencedColumnName="id")
      */
     private $product;
