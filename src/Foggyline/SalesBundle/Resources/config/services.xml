@@ -29,6 +29,12 @@
             <argument type="service" id="router"/>
         </service>
 
+
+        <service id="foggyline_sales.bestsellers" class="Foggyline\SalesBundle\Service\BestSellers">
+            <argument type="service" id="doctrine.orm.entity_manager"/>
+            <argument type="service" id="router"/>
+        </service>
+
     </services>
 
 </container>

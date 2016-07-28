@@ -22,6 +22,9 @@ class OverrideServiceCompilerPass implements CompilerPassInterface
         $container->removeDefinition('foggyline_customer.customer_orders');
         $container->setDefinition('foggyline_customer.customer_orders', $container->getDefinition('foggyline_sales.customer_orders'));
 
+        $container->removeDefinition('bestsellers');
+        $container->setDefinition('bestsellers', $container->getDefinition('foggyline_sales.bestsellers'));
+
         $container->getDefinition('foggyline_sales.shipment')
             ->addArgument(
                 array_keys($container->findTaggedServiceIds('shipment_method'))

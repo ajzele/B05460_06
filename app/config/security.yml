@@ -64,6 +64,6 @@ security:
         - { path: customer/, roles: ROLE_ADMIN }
 #        - { path: customer/, roles: ROLE_ADMIN } # Handle all customer/ routes by checking within the controller
         # protect any possible auto-generated CRUD actions from everyone's access
-        - { path: /new, roles: ROLE_ADMIN }
-        - { path: /edit, roles: ROLE_ADMIN }
-        - { path: /, roles: ROLE_ADMIN, methods: [DELETE] }
+#        - { path: /new, roles: ROLE_ADMIN }
+#        - { path: /edit, roles: ROLE_ADMIN }
+#        - { path: /, roles: ROLE_ADMIN, methods: [DELETE] }

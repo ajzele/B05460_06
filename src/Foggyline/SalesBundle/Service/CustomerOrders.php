@@ -30,9 +30,6 @@ class CustomerOrders
                 ->findBy(array('customer' => $this->token->getUser()));
 
             foreach ($salesOrders as $salesOrder) {
-//                $date = $salesOrder->getCreatedAt()->format('d/m/Y H:i:s');
-//                $date = new \DateTime();
-//                $date->format('d/m/Y H:i:s')
                 $orders[] = array(
                     'id' => $salesOrder->getId(),
                     'date' => $salesOrder->getCreatedAt()->format('d/m/Y H:i:s'),

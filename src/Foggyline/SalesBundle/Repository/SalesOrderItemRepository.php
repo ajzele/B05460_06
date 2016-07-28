@@ -10,4 +10,22 @@ namespace Foggyline\SalesBundle\Repository;
  */
 class SalesOrderItemRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function getBestsellers()
+    {
+        $products = array();
+
+        $query = $this->_em->createQuery('SELECT IDENTITY(t.product), SUM(t.qty) AS HIDDEN q
+                        FROM Foggyline\SalesBundle\Entity\SalesOrderItem t
+                        GROUP BY t.product ORDER BY q DESC')
+                        ->setMaxResults(5);
+
+        $_products = $query->getResult();
+
+        foreach ($_products as $_product) {
+            $products[] = $this->_em->getRepository('FoggylineCatalogBundle:Product')
+                                ->find(current($_product));
+        }
+
+        return $products;
+    }
 }
