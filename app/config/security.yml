@@ -56,12 +56,12 @@ security:
 
     access_control:
         # exclude /login path from firewall
-        - { path: customer/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: customer/register, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: customer/forgotten_password, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: customer/account, roles: ROLE_USER }
-        - { path: customer/logout, roles: ROLE_USER }
-        - { path: customer/, roles: ROLE_ADMIN }
+#        - { path: customer/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+#        - { path: customer/register, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+#        - { path: customer/forgotten_password, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+#        - { path: customer/account, roles: ROLE_USER }
+#        - { path: customer/logout, roles: ROLE_USER }
+#        - { path: customer/, roles: ROLE_ADMIN }
 #        - { path: customer/, roles: ROLE_ADMIN } # Handle all customer/ routes by checking within the controller
         # protect any possible auto-generated CRUD actions from everyone's access
 #        - { path: /new, roles: ROLE_ADMIN }
