@@ -448,5 +448,10 @@ class Customer implements UserInterface, \Serializable
             $this->password,
         ) = unserialize($serialized);
     }
+
+    public function __toString()
+    {
+        return $this->getFirstName() . ' ' . $this->getLastName();
+    }
 }
 

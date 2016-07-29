@@ -1,3 +1,7 @@
+foggyline_sales_sales_order:
+    resource: "@FoggylineSalesBundle/Controller/SalesOrderController.php"
+    type:     annotation
+
 foggyline_sales:
     resource: "@FoggylineSalesBundle/Resources/config/routing.xml"
     prefix:   /sales/
