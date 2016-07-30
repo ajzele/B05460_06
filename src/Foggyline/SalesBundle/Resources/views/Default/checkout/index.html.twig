@@ -18,19 +18,16 @@
                             {% set shipment = method.getInfo('street', 'city', 'country', 'postcode', 'amount', 'qty')['shipment'] %}
                             <li>
                                 <label>{{ shipment.title }}</label>
-                                {#{{ shipment.code }}#}
-                                {#{{ shipment.url_process }}#}
-
                                 <ul>
                                     {% for delivery_option in shipment.delivery_options %}
                                         <li>
                                             <input type="radio" name="shipment_method"
-                                                   value="{{ shipment.code }}____{{ delivery_option.code }}"> {{ delivery_option.title }}
+                                                   value="{{ shipment.code }}____{{ delivery_option.code }}____{{ delivery_option.price }}"> {{ delivery_option.title }}
+                                            ({{ delivery_option.price }})
                                             <br>
                                         </li>
                                     {% endfor %}
                                 </ul>
-
                             </li>
                         {% endfor %}
                     </ul>

@@ -134,16 +134,9 @@ class SalesOrderController extends Controller
         return $this->createFormBuilder()
             ->setAction($this->generateUrl('salesorder_delete', array('id' => $salesOrder->getId())))
             ->setMethod('DELETE')
-            ->getForm()
-        ;
+            ->getForm();
     }
 
-    /**
-     * Prints order.
-     *
-     * @Route("/{id}", name="foggyline_sales_order_print")
-     * @Method("GET")
-     */
     public function printAction($id)
     {
         if ($customer = $this->getUser()) {
@@ -160,12 +153,6 @@ class SalesOrderController extends Controller
         return $this->redirectToRoute('customer_account');
     }
 
-    /**
-     * Cancels order.
-     *
-     * @Route("/{id}", name="foggyline_sales_order_cancel")
-     * @Method("GET")
-     */
     public function cancelAction($id)
     {
         if ($customer = $this->getUser()) {

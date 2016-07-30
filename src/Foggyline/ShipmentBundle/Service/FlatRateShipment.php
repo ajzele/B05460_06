@@ -27,7 +27,7 @@ class FlatRateShipment
                     array(
                         'title' => 'Fixed',
                         'code' => 'fixed',
-                        'price' => 9.99
+                        'price' => 4.99
                     )
                 ),
                 'url_process' => $this->router->generate('foggyline_shipment_flat_rate_process'),

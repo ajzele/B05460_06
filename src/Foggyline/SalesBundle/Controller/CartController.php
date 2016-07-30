@@ -4,19 +4,14 @@ namespace Foggyline\SalesBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 
 
 class CartController extends Controller
 {
-    public function indexAction(Request $request)
+    public function indexAction()
     {
-        // Fetch current logged in customer
         if ($customer = $this->getUser()) {
             $em = $this->getDoctrine()->getManager();
-
-
 
 
             $cart = $em->getRepository('FoggylineSalesBundle:Cart')->findOneBy(array('customer' => $customer));
@@ -36,15 +31,6 @@ class CartController extends Controller
             $this->addFlash('warning', 'Only logged in customers can access cart page.');
             return $this->redirectToRoute('foggyline_customer_login');
         }
-
-        // Grab cart based on logged in customer
-
-        // Grab cart items based on cart
-
-        // List cart items
-
-//        $em = $this->getDoctrine()->getManager();
-
     }
 
     public function updateAction(Request $request)
@@ -96,7 +82,7 @@ class CartController extends Controller
 
             // Grab the possibly existing cart item
             // But, lets find it directly
-            $cartItem = $em->getRepository('FoggylineSalesBundle:CartItem')->findOneBy(array('cart' => $cart, 'product'=>$product));
+            $cartItem = $em->getRepository('FoggylineSalesBundle:CartItem')->findOneBy(array('cart' => $cart, 'product' => $product));
 
             if ($cartItem) {
                 // Cart item exists, update it

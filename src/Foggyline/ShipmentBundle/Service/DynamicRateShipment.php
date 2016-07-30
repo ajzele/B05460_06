@@ -41,12 +41,12 @@ class DynamicRateShipment
             array(
                 'title' => 'Same day delivery',
                 'code' => 'dynamic_rate_sdd',
-                'price' => 9.99
+                'price' => 19.99
             ),
             array(
                 'title' => 'Standard delivery',
                 'code' => 'dynamic_rate_sd',
-                'price' => 4.99
+                'price' => 9.99
             ),
         );
     }

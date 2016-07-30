@@ -9,7 +9,7 @@
             <argument type="service" id="doctrine.orm.entity_manager"/>
             <argument type="service" id="router"/>
         </service>
-        
+
         <service id="foggyline_sales.checkout_menu" class="Foggyline\SalesBundle\Service\CheckoutMenu">
             <argument type="service" id="doctrine.orm.entity_manager"/>
             <argument type="service" id="security.token_storage"/>
