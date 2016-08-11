@@ -31,6 +31,18 @@ security:
             cost: 12
 
     firewalls:
+    
+        guard_new_edit:
+            pattern: /(new)|(edit)
+            methods: [GET, POST]
+            anonymous: ~
+            http_basic: ~
+
+        guard_delete:
+            pattern: /
+            methods: [DELETE]
+            anonymous: ~
+            http_basic: ~    
 
         # Add this #3
         foggyline_customer:
@@ -48,11 +60,6 @@ security:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
-
-        main:
-            # todo: check if we can move this to "pattern" and have it do /admin or something to trigger HTTP basic login
-            anonymous: ~
-            http_basic: ~
 
     access_control:
         # exclude /login path from firewall
